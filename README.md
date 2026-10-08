@@ -1,19 +1,19 @@
-# WellPath
+# WellPath Ultimate V4
 
-A mobile-first wellness education web app. Users can search and select multiple health conditions and see categorized general wellness information.
+Mobile-first wellness education app with a local starter catalog plus optional live WHO ICD-11 2026 search.
 
-## Run locally
-```bash
-npm install
-npm run dev
-```
-Open http://localhost:3000
+## V4 upgrades
+- WHO ICD-11 API search through a server-side Next.js route (credentials never shipped to the browser).
+- WHO entity lookup API route foundation.
+- Persistent profile + local data storage.
+- Accessible form controls and labels.
+- Responsive dashboard, condition library, daily plan, tracker, medication/allergy list, safety center, and PWA manifest.
+- Local catalog remains usable when WHO credentials are not configured.
 
-## Deploy with GitHub + Vercel
-1. Create a new GitHub repository named `wellpath`.
-2. Upload all files in this folder to the repository.
-3. Go to Vercel, import the GitHub repository, and deploy. Framework preset: Next.js.
-4. Vercel will build and host the app.
+## WHO API setup
+Create ICD API credentials at the WHO ICD API portal, then set `WHO_ICD_CLIENT_ID` and `WHO_ICD_CLIENT_SECRET` in Vercel Project Settings → Environment Variables. The app uses OAuth client credentials and the WHO ICD API v2.
 
-## Medical safety
-This is an educational wellness app, not a diagnostic or treatment tool. Expand the data only with reputable medical sources and have clinical content reviewed before presenting it as medical advice.
+WHO documentation: https://icd.who.int/docs/icd-api/
+
+## Important
+This is an educational wellness product, not a diagnostic or treatment tool. Do not add medication dosing or emergency-care substitutions.
