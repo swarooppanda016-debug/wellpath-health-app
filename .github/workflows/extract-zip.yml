@@ -19,7 +19,7 @@ jobs:
           unzip -o wellpath-starter.zip -d extracted
 
           cp -r extracted/wellpath/* .
-          cp -r extracted/wellpath/.[!.]* . 2>/dev/null || true
+        
 
           rm -rf extracted
           rm -f wellpath-starter.zip
