@@ -1,19 +1,28 @@
-# WellPath Ultimate V4
+# WellPath Ultimate V5
 
-Mobile-first wellness education app with a local starter catalog plus optional live WHO ICD-11 2026 search.
+Mobile-first wellness education app with condition planning, WHO ICD-11 search, progress tracking, safety information, and a local doctor finder.
 
-## V4 upgrades
-- WHO ICD-11 API search through a server-side Next.js route (credentials never shipped to the browser).
-- WHO entity lookup API route foundation.
-- Persistent profile + local data storage.
-- Accessible form controls and labels.
-- Responsive dashboard, condition library, daily plan, tracker, medication/allergy list, safety center, and PWA manifest.
-- Local catalog remains usable when WHO credentials are not configured.
+## Features
+- Condition/disease starter library plus WHO ICD-11 2026 search
+- Personalized daily wellness planning
+- Local progress tracking, medication list and allergy list
+- Safety center and appointment preparation
+- **Find doctors**: enter a locality/address + Indian 6-digit PIN; the app maps selected conditions to relevant specialties and searches nearby healthcare providers
+- PWA-ready responsive UI
 
-## WHO API setup
-Create ICD API credentials at the WHO ICD API portal, then set `WHO_ICD_CLIENT_ID` and `WHO_ICD_CLIENT_SECRET` in Vercel Project Settings → Environment Variables. The app uses OAuth client credentials and the WHO ICD API v2.
+## Doctor Finder setup
+The doctor finder uses Google Maps Platform Places API (New) and Geocoding. Create a Google Cloud project, enable **Places API (New)** and **Geocoding API**, configure billing, and create a restricted server API key.
 
-WHO documentation: https://icd.who.int/docs/icd-api/
+Add this environment variable in Vercel:
 
-## Important
-This is an educational wellness product, not a diagnostic or treatment tool. Do not add medication dosing or emergency-care substitutions.
+`GOOGLE_MAPS_API_KEY=...`
+
+Do not expose this key as `NEXT_PUBLIC_*`. The app calls Google from the server route `/api/doctors/search`.
+
+Google recommends restricting API keys to the required APIs and appropriate server application restrictions.
+
+## WHO ICD-11
+Add `WHO_ICD_CLIENT_ID` and `WHO_ICD_CLIENT_SECRET` in Vercel if you want the live WHO search.
+
+## Medical safety
+This is an educational wellness application, not a diagnostic or treatment tool. Doctor listings are third-party directory results and must be independently verified by the user. Do not rely on the app for emergency care, diagnosis, prescriptions, or medication dosing.
