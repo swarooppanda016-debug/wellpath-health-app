@@ -3,6 +3,10 @@ name: Extract WellPath ZIP
 on:
   workflow_dispatch:
 
+# Allow the GitHub Action to push changes
+permissions:
+  contents: write
+
 jobs:
   extract:
     runs-on: ubuntu-latest
@@ -10,6 +14,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          persist-credentials: true
 
       - name: Extract WellPath ZIP
         run: |
@@ -20,19 +26,16 @@ jobs:
           echo "Extracting ZIP..."
           unzip -o wellpath-starter.zip -d extracted
 
-          echo "Contents after extraction:"
-          find extracted -maxdepth 3 -type f | sort
+          echo "Files extracted:"
+          find extracted -maxdepth 4 -type f | sort
 
           echo "Copying project files..."
-          cp -r extracted/* .
+          cp -r extracted/. .
 
           echo "Removing temporary folder..."
           rm -rf extracted
 
-          echo "Final project structure:"
-          find . -maxdepth 3 -type f \
-            ! -path "./.git/*" \
-            ! -path "./node_modules/*" | sort
+          echo "Project files are ready."
 
       - name: Commit extracted files
         run: |
